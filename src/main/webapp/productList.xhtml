@@ -1,0 +1,45 @@
+<ui:composition template="template.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="Container">
+        <h2 style="color:red;">Product list for #{productListBean.category.name}</h2>
+
+
+        <h:form>
+
+            <h:dataTable id="productTable" value="#{productListBean.productModel}" var="product">
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputLink  value="productDetail.xhtml">
+                        <f:param name="id" value="#{product.id}" />
+                        <h:outputText value="#{product.name}" />
+                    </h:outputLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputFormat value="#{product.price}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Add</f:facet>
+                    <h:commandButton value="Add" action="#{basketBean.addToBasket}">
+                        <f:setPropertyActionListener value="#{product}" target="#{basketBean.selectedProduct}" ></f:setPropertyActionListener>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+
+            <h:commandLink rendered="#{productListBean.previous}" action="#{productListBean.showPrevious}"> (PREV) </h:commandLink>
+            <h:commandLink rendered="#{productListBean.next}" action="#{productListBean.showNext}"> (NEXT) </h:commandLink>
+            <br />
+            <h:commandButton value="BASKET" action="basket.xhtml"/>
+            <h:commandButton value="BACK TO MAIN" action="index.xhtml"/>
+        </h:form>
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+

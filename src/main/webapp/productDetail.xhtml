@@ -1,0 +1,27 @@
+<ui:composition template="template.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="Container">
+        <h:form>
+            <h2><h:outputText value="#{productDetailBean.selectedProduct.name}"/></h2>
+
+            <h:panelGrid columns="2" border="1">
+                <h:outputText value="Price" />
+                <h:outputFormat value="{0} zł" >
+                    <f:param value="#{productDetailBean.selectedProduct.price}" />
+                </h:outputFormat>
+
+                <h:outputText value="Description"/>
+                <h:outputText value="#{productDetailBean.selectedProduct.describe}" />
+                <h:commandButton value="Add" actionListener="#{basketBean.actionListener}" action="#{basketBean.addToBasket}">
+                    <f:param name="productId" value="#{productDetailBean.selectedProduct.id}" />
+                </h:commandButton>
+            </h:panelGrid>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+
